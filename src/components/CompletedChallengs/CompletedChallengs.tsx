@@ -11,4 +11,4 @@ export function CompletedChallengs(){
             <span>{challengesCompleted}</span>
         </div>
     )
-}
+}  
