@@ -52,6 +52,20 @@ flex: 1;
     transition: background-color 0.2s;
 
 }
-.CountDonwButton:hover{
+/* Se o botao nao estiver desativado */
+.CountDonwButton:not(:disabled):hover{  
     background: var(--blue-dark);
+}
+.CountDonwButtonActive{
+    background: var(--wite);
+    color: var(--title);
+}
+.CountDonwButtonActive:not(:disabled):hover{
+    background: var(--red);
+    color: var(--wite);
+}
+.CountDonwButton:disabled {
+    background: var(--wite);
+    color: var(--title);
+    cursor: not-allowed;
 }
