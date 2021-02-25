@@ -1,47 +1,15 @@
-import { useState, useEffect, useContext} from 'react'
-import { ChallengesContext } from '../../context/ChallengesContext';
+import {  useContext} from 'react'
 import styles from '../../styles/CountDown.module.css'
-
-//para zerar o time
-let countdownTimeout: NodeJS.Timeout;
+import { CountDownContext } from '../../context/CountDownContext';
 
 export function CountDown (){
-    const {startNewChallenge} = useContext(ChallengesContext)
-
-    const [time , setTime] =useState(0.1 * 60)
-    const [isActive, setIsActive] = useState(false)
-    const [isFinished, setIsFinished] = useState(false)
-
-    const minutes = Math.floor (time / 60) //arrendondar para baixo;
-    const segundo = time % 60 //resto da divisao
+    const {minutes,segundo, isFinished, startCountDown, isActive, resetCountDown} = useContext(CountDownContext)
 
     //dar um split dividindo em dois caractere o PADSTART verificar se nao tem dois caractere se nao acrescente 0 (zero) a esquerda
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
     const [segundoLeft, segundoRiht] = String(segundo).padStart(2, '0').split('');
 
-    function resetCountDown(){
-        clearTimeout(countdownTimeout); //zerando o time e depois faz o false do active para nao descer um segundo
-        setIsActive(false);
-        setTime(25 * 60); // voltando valor inicial de 25seg
-    }
-
-    function startCountDown(){
-        setIsActive(true);
-    }
-
-    //observando o valor do isActive e time
-    useEffect(()=>{
-        if(isActive && time > 0 ){
-            //receber o valor do time para poder zerar
-            countdownTimeout =  setTimeout(()=>{
-                setTime( time - 1)
-            }, 1000)           
-        } else if(isActive && time === 0){  // quando zerar 
-            setIsFinished(true)
-            setIsActive(false);
-            startNewChallenge()//funcao vinda do context 
-        }
-    },[isActive,time])
+   
 
 return(
     <div>

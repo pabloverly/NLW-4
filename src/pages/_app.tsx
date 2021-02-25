@@ -6,6 +6,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     // Provide torna public os acesso dentre os dados dos componetes /
+    
    <ChallengesProvider>
        <Component {...pageProps} />
    </ChallengesProvider>    
